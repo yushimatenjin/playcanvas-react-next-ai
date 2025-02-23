@@ -39,6 +39,12 @@ export default function RootLayout({
             >
               Physics
             </a>
+            <a
+              href="./explode"
+              className="hover:text-gray-300 transition-colors duration-200 px-3 py-2"
+            >
+              Explode
+            </a>
           </nav>
         </header>
         {children}
