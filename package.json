@@ -1,0 +1,35 @@
+{
+	"name": "playcanvas-nextjs",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "biome check --write app",
+		"check-types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@playcanvas/react": "latest",
+		"@tanstack/react-query": "^5.60.5",
+		"framer-motion": "^12.4.7",
+		"leva": "^0.9.35",
+		"motion": "^12.4.7",
+		"next": "15.0.3",
+		"playcanvas": "latest",
+		"react": "18.3.1",
+		"react-dom": "18.3.1",
+		"react-error-boundary": "^4.1.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^20",
+		"@types/react": "18.3.1",
+		"@types/react-dom": "18.3.0",
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.5.3",
+		"tailwindcss": "3.4.1",
+		"typescript": "5.5.4"
+	}
+}
