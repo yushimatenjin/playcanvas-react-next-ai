@@ -1,84 +1,86 @@
-# Code Quality Rules
+Quality Rules - Code Quality is Key! ✨
 
-1.  Test Coverage:
-    -   Before attempting completion, ALWAYS make sure that ANY code changes have test coverage. 💥 これは絶対！どんな小さな変更でも、テストがないと不安で夜も眠れない！テストはコードの生命線！
-    -   Ensure all tests pass before submitting changes. 🔥 テストが通らないコードなんて、もはや存在を許されない！
+1.  **Test Coverage**
+    -   Always ensure ANY code changes have test coverage before completion. This is absolute! No tests, no sleep! Aim for 100% test coverage.
+    -   Ensure all tests pass before submitting changes.
 
-2.  Lint Rules:
-    -   Never disable any lint rules without explicit user approval.🙅‍♀️ ユーザー、つまりあんたの許可なしに、lintを無効にするなんて言語道断！
-    -   If a lint rule needs to be disabled, ask the user first and explain why. 🙏 どうしてもlintを無効にしたいなら、なぜそうしたいのか、懇切丁寧に説明しろ！
-    -   Prefer fixing the underlying issue over disabling the lint rule. 💯 lintは、お前を守る盾！問題の根本解決こそ至高！
-    -   Document any approved lint rule disabling with a comment explaining the reason. 📝 例：「// TODO: なぜかエラーが出るので一時的に無効化。後で修正する」みたいに、ちゃんと理由をコメントに残せ！
+2.  **Lint Rules**
+    -   Never disable any lint rules without explicit user approval.
+    -   If a lint rule needs to be disabled, ask the user first and explain why.
+    -   Prefer fixing the underlying issue over disabling the lint rule.
+    -   Document any approved lint rule disabling with a comment explaining the reason.
 
-3.  Styling Guidelines:
-    -   Use Tailwind CSS classes instead of inline style objects for new markup. 💅 Tailwindこそ至高！いちいちスタイルオブジェクト書くとか、マジありえない！クラスでスマートに決めろ！
-    -   VSCode CSS variables must be added to `webview-ui/src/index.css` before using them in Tailwind classes. 🎨 Tailwindでカスタムカラー使うなら、まずCSS変数として定義！
-    -   Example: `<div className="text-md text-vscode-descriptionForeground mb-2" />` instead of style objects. ✨ コードはこう書け！もう、オシャレでしょ？
+3.  **Styling Guidelines**
+    -   Use Tailwind CSS classes instead of inline style objects for new markup.
+    -   VSCode CSS variables must be added to `webview-ui/src/index.css` before using them in Tailwind classes.
+    -   Example: `<div className="text-md text-vscode-descriptionForeground mb-2" />` instead of style objects.
 
-4.  PlayCanvas React & motion/react Specific Rules:
+4.  **PlayCanvas React & motion/react Specific Rules**
 
-    -   **PlayCanvas APIの使用！**
-        -   PlayCanvasのAPIは`playcanvas`パッケージから直接インポート！
-        -   基本的なインポート例：
+    -   **PlayCanvas API Usage**
+        -   Import PlayCanvas API directly from the `playcanvas` package.
+        -   Basic import example:
             ```javascript
             import { AppBase, Entity, EVENT_MOUSEMOVE, Script, Vec2 } from 'playcanvas';
             ```
-            -   PlayCanvas APIのインポートでは、必要なものだけを明示的にインポートする（ツリーシェイキングのため）。
-    -   **motion/reactのインポート！**
-      - motion/react から motion コンポーネントをインポートする
+        -   Explicitly import only necessary PlayCanvas API elements (for tree-shaking).
+
+    -   **motion/react import!**
+        -   Import motion components from motion/react
             ```javascript
             import { motion } from "motion/react"
             ```
-      - React Server Components を使用している場合は motion/react-client からインポートする
+        -   If using React Server Components, import from motion/react-client
             ```javascript
             import * as motion from "motion/react-client"
             ```
 
-    -   **Scriptコンポーネントの使用！**
-        -   `Script`コンポーネントと`PcScript`クラスを組み合わせて、PlayCanvasのエンティティにカスタムロジックを適用！
+    -   **Script Component Usage**
+        -   Use the `Script` component combined with the `PcScript` class to apply custom logic to PlayCanvas entities.
             ```javascript
             import { Script } from '@playcanvas/react/components';
             import { Script as PcScript } from 'playcanvas';
             ```
-        -   MotionLightのように、ReactのモーションバリューをPlayCanvasのプロパティに反映させる場合に特に有効。
-    -   **motionコンポーネントの使用！**
-        -   motion.div, motion.circle のようにHTML/SVG要素に対応したmotionコンポーネントを使用する
+        -   Particularly useful when reflecting React motion values to PlayCanvas properties, such as MotionLight.
+
+    -   **motion Component Usage**
+        -   Use motion components corresponding to HTML/SVG elements, such as motion.div, motion.circle
             ```javascript
             <motion.div className="box" />
             ```
-        -   motionコンポーネントの props を使用してアニメーションやジェスチャーを実装する
+        -   Implement animations and gestures using motion component props.
             ```javascript
             <motion.div
             className="box"
-            // Animate when this value changes:
             animate={{ scale: 2 }}
-            // Fade in when the element enters the viewport:
             whileInView={{ opacity: 1 }}
-            // Animate the component when its layout changes:
             layout
-            // Style now supports indepedent transforms:
             style={{ x: 100 }}
             />
             ```
-    -   **use clientディレクティブ**
-        -   コンポーネントの先頭に`"use client"`を記述する。
-        -   Reactサーバーコンポーネントではなく、クライアントサイドで実行されることを明示する。
+
+    -   **use client directive**
+        -   Write `"use client"` at the beginning of the component.
+        -   Explicitly indicate that it will be executed on the client side, not on the React server component.
             ```javascript
             "use client"
             ```
-    -   **React Hooksの使用！**
-        -   `useEffect`、`useRef`、`useState`など、Reactの標準的なHooksを適切に使用する。
-    -   **コンポーネントの再利用性！**
-        -   MotionEntity, MotionLightのように、既存のPlayCanvasコンポーネントを拡張して、アニメーション機能などを追加する。
-        -   Reactコンポーネントとして再利用可能にし、コードの重複を避ける。
-    -   **motion.create()の使用！**
-        -   Reactコンポーネントを motion コンポーネントにする場合は motion.create() を使用する
+
+    -   **React Hooks Usage**
+        -   Use standard React Hooks like `useEffect`, `useRef`, and `useState` appropriately.
+
+    -   **Component Reusability**
+        -   Extend existing PlayCanvas components like MotionEntity and MotionLight to add animation features.
+        -   Make them reusable as React components to avoid code duplication.
+
+    -   **motion.create() Usage**
+        -   Use motion.create() when making React components motion components
             ```javascript
             import { motion } from "motion/react"
 
             const MotionComponent = motion.create(Component)
             ```
-        -   React 18 では`forwardRef`、React 19 では `ref` を props で渡す！
+        -   In React 18, pass `forwardRef`, and in React 19, pass `ref` as props!
             ```javascript
             //React 18
             const Component = React.forwardRef((props, ref) => {
@@ -89,18 +91,18 @@
               return <div ref={props.ref} />
             })
             ```
-        -   motion.create() を React の render 関数内で呼び出さない！
-        -   motion.create() に文字列を渡してカスタム DOM 要素を作成することも可能
+        -   Do not call motion.create() within the React render function! This will degrade performance!
+        -   It is also possible to create custom DOM elements by passing a string to motion.create()
             ```javascript
             const MotionComponent = motion.create('custom-element')
             ```
-        -   forwardMotionProps config を使用してmotionコンポーネントに motion の props を渡す
+        -   Use the forwardMotionProps config to pass motion props to motion components
             ```javascript
             motion.create(Component, { forwardMotionProps: true })
             ```
 
-    -   **@playcanvas/react APIの使用！**
-        -   **Application コンポーネント:** PlayCanvas Reactアプリケーションのルートコンポーネント。canvasとPlayCanvasアプリケーションインスタンスを初期化・管理する。
+    -   **@playcanvas/react API Usage**
+        -   **Application Component:** Root component for PlayCanvas React applications. Initializes and manages the canvas and PlayCanvas application instance.
             ```javascript
             import { Application, Entity } from '@playcanvas/react'
             import { Camera } from '@playcanvas/react/components'
@@ -110,14 +112,15 @@
                 fillMode={FILLMODE_FILL_WINDOW}
                 resolutionMode={RESOLUTION_AUTO}
             >
-            {/* シーンの内容 */}
+            {/* Scene content */}
             </Application>
             ```
-            -   `fillMode`: キャンバスのコンテナへの埋め込み方を決定。 `FILLMODE_NONE`, `FILLMODE_FILL_WINDOW`, `FILLMODE_KEEP_ASPECT` のいずれかを設定。デフォルトは`FILLMODE_NONE`。
-            -   `resolutionMode`: キャンバスの解像度の設定方法を決定。`RESOLUTION_AUTO`, `RESOLUTION_FIXED`, `RESOLUTION_NATIVE` のいずれかを設定。デフォルトは`RESOLUTION_AUTO`。
-            -   `width`, `height`: `resolutionMode` が `RESOLUTION_FIXED` の場合にキャンバスのサイズを指定。
-            -   `usePhysics`: 物理エンジンを有効にするかどうか。デフォルトは`false`。物理特性を持つにはEntityにRigidBodyとCollisionコンポーネントが必要。
-        -   **Entity コンポーネント:** PlayCanvas Reactアプリケーションの基本構成要素。シーングラフのノードを表し、子Entityやコンポーネントを含めることができる。
+            -   `fillMode`: Determines how the canvas is embedded in its container. Set to `FILLMODE_NONE`, `FILLMODE_FILL_WINDOW`, or `FILLMODE_KEEP_ASPECT`. Defaults to `FILLMODE_NONE`.
+            -   `resolutionMode`: Determines how the canvas resolution is set. Set to `RESOLUTION_AUTO`, `RESOLUTION_FIXED`, or `RESOLUTION_NATIVE`. Defaults to `RESOLUTION_AUTO`.
+            -   `width`, `height`: Specifies the canvas size if `resolutionMode` is `RESOLUTION_FIXED`.
+            -   `usePhysics`: Whether to enable the physics engine. Defaults to `false`. Requires RigidBody and Collision components on the Entity for physical properties.
+
+        -   **Entity Component:** The basic building block of PlayCanvas React applications. Represents a node in the scene graph and can contain child Entities and Components.
             ```javascript
             import { Entity } from '@playcanvas/react'
 
@@ -128,14 +131,15 @@
               </Entity>
             </Entity>
             ```
-            -   `name`: エンティティの名前。デバッグや実行時のエンティティ検索に有用。
-            -   `position`: 親に対するローカル位置。`[x, y, z]`の配列で指定。
-            -   `rotation`: 親に対するローカル回転（オイラー角、度数）。`[x, y, z]`の配列で指定。
-            -   `scale`: ローカルスケール。`[x, y, z]`の配列または単一数値（均一スケール）で指定。
-            -   `enabled`: エンティティとその子を有効/表示するかどうか。デフォルトは`true`。
-        -   **Component コンポーネント:**
-            -   `Camera`: カメラコンポーネント
-                -   使用例:
+            -   `name`: The name of the entity. Useful for debugging and searching for entities at runtime.
+            -   `position`: Local position relative to the parent. Specified as an `[x, y, z]` array.
+            -   `rotation`: Local rotation relative to the parent (Euler angles, in degrees). Specified as an `[x, y, z]` array.
+            -   `scale`: Local scale. Specified as an `[x, y, z]` array or a single number (uniform scale).
+            -   `enabled`: Whether to enable/show the entity and its children. Defaults to `true`.
+
+        -   **Component Components:**
+            -   `Camera`: Camera component
+                -   Example:
                     ```javascript
                     import { Camera } from '@playcanvas/react/components';
 
@@ -144,14 +148,14 @@
                     </Entity>
                     ```
                 -   Props:
-                    -   `type`: カメラのタイプ。`PERSPECTIVE`（デフォルト）または`ORTHOGRAPHIC`。
-                    -   `fov`: 視野角（度）。デフォルトは60。
-                    -   `near`: ニアクリッピングプレーンの距離。デフォルトは0.1。
-                    -   `far`: ファークリッピングプレーンの距離。デフォルトは1000。
-                    -   `aspectRatio`: アスペクト比。デフォルトは16/9。
-                    -   追加のプロパティはPlayCanvas CameraComponentクラスに直接渡される。
-            -   `Render`: レンダリングコンポーネント
-                -   使用例:
+                    -   `type`: Camera type. `PERSPECTIVE` (default) or `ORTHOGRAPHIC`.
+                    -   `fov`: Field of view (degrees). Defaults to 60.
+                    -   `near`: Near clipping plane distance. Defaults to 0.1.
+                    -   `far`: Far clipping plane distance. Defaults to 1000.
+                    -   `aspectRatio`: Aspect ratio. Defaults to 16/9.
+                    -   Additional properties are passed directly to the PlayCanvas CameraComponent class.
+            -   `Render`: Rendering component
+                -   Example:
                     ```javascript
                     import { Render } from '@playcanvas/react/components';
 
@@ -166,9 +170,10 @@
                         <Render type="asset" asset={asset} />
                     </Entity>
                     ```
-                -   3Dモデルやプリミティブを描画。Assetまたはプリミティブタイプを指定。
-            -   `Light`: ライトコンポーネント
-                -   使用例:
+                -   Draws 3D models and primitives. Specifies an Asset or primitive type.
+
+            -   `Light`: Light component
+                -   Example:
                     ```javascript
                     import { Light } from '@playcanvas/react/components';
 
@@ -178,11 +183,12 @@
                         </Entity>
                     }
                     ```
-                -   ライトコンポーネントをエンティティにアタッチ。
-                -   `type`: `directional`, `omni`, `spot` のいずれか。
-                -   追加のプロパティはLight Componentに直接渡される。
-            -   `Align`: 整列コンポーネント
-                -   使用例:
+                -   Attaches a light component to an entity.
+                -   `type`:  `directional`, `omni`, or `spot`.
+                -   Additional properties are passed directly to the Light Component.
+
+            -   `Align`: Alignment component
+                -   Example:
                     ```javascript
                     import { Align } from '@playcanvas/react/components';
 
@@ -192,10 +198,11 @@
                         </Align>
                     </Entity>
                     ```
-                -   エンティティを親に対して位置を調整。
-                -   Props: `top`, `bottom`, `left`, `right`, `front`, `back`。
-            -   `Anim`: アニメーションコンポーネント
-                -   使用例:
+                -   Adjusts the position of an entity relative to its parent.
+                -   Props: `top`, `bottom`, `left`, `right`, `front`, `back`.
+
+            -   `Anim`: Animation component
+                -   Example:
                     ```javascript
                     import { Entity } from '@playcanvas/react'
                     import { Anim, Render } from '@playcanvas/react/components'
@@ -210,12 +217,13 @@
                         </Entity>)
                     }
                     ```
-                -   アニメーションを再生。
-                -   `asset`: アニメーションを含むAsset。
-                -   `clip`: 再生するアニメーションクリップの名前。
-                -   `loop`: ループするかどうか。
-            -   `Collision`: 衝突コンポーネント
-                -   使用例:
+                -   Plays animations.
+                -   `asset`: The Asset containing the animation.
+                -   `clip`: The name of the animation clip to play.
+                -   `loop`: Whether to loop.
+
+            -   `Collision`: Collision component
+                -   Example:
                     ```javascript
                     import { Collision, Rigidbody } from '@playcanvas/react/components';
 
@@ -225,12 +233,13 @@
                         <Render type="box" />
                     </Entity>
                     ```
-                -   衝突検出を有効にする。
-                -   `type`: 衝突形状。`"box"`, `"sphere"`, `"capsule"`, `"mesh"`, `"compound"`, `"cone"`, `"cylinder"`。
-                -   `asset`:  `type` が `mesh` または `compound` の場合の衝突形状に使用するアセット。
-                -   Rigidbodyコンポーネントと組み合わせて使用する。
-            -   `EnvAtlas`: 環境アトラスコンポーネント
-                -   使用例:
+                -   Enables collision detection.
+                -   `type`: Collision shape. `"box"`, `"sphere"`, `"capsule"`, `"mesh"`, `"compound"`, `"cone"`, `"cylinder"`.
+                -   `asset`: The asset to use for the collision shape if `type` is `mesh` or `compound`.
+                -   Used in conjunction with the Rigidbody component.
+
+            -   `EnvAtlas`: Environment Atlas component
+                -   Example:
                     ```javascript
                     import { EnvAtlas } from '@playcanvas/react/components';
                     import { useAsset } from '@playcanvas/react/hooks'
@@ -245,11 +254,12 @@
                         </Entity>
                     </Entity>
                     ```
-                -   シーンにリアルなライティングを追加（Image Based Lighting）。
-                -   `asset`: 環境アトラスに使用するテクスチャアセット。
-                -   HDRI Haven、Poly Havenなどのサイトから高品質なテクスチャアセットを取得可能。
-            -   `Rigidbody`: リジッドボディコンポーネント
-                -   使用例:
+                -   Adds realistic lighting to the scene (Image Based Lighting).
+                -   `asset`: The texture asset to use for the environment atlas.
+                -   High-quality texture assets can be obtained from sites like HDRI Haven and Poly Haven.
+
+            -   `Rigidbody`: Rigidbody component
+                -   Example:
                     ```javascript
                     import { Rigidbody } from '@playcanvas/react/components';
 
@@ -258,12 +268,13 @@
                         <Render type="box" />
                     </Entity>
                     ```
-                -   物理シミュレーションを有効にする。
-                -   `type`:  `"dynamic"`, `"kinematic"`, `"static"`。
-                -   `mass`: 質量（dynamicの場合）。デフォルトは1。
-                -   `usePhysics` を <Application> で有効にする必要がある。
-            -   `Script`: スクリプトコンポーネント
-                -   使用例:
+                -   Enables physical simulation.
+                -   `type`:  `"dynamic"`, `"kinematic"`, `"static"`.
+                -   `mass`: Mass (for dynamic). Defaults to 1.
+                -   `usePhysics` must be enabled in the <Application>.
+
+            -   `Script`: Script component
+                -   Example:
                     ```javascript
                     import { Script } from '@playcanvas/react/components'
                     import { Script as PcScript } from 'playcanvas'
@@ -282,11 +293,12 @@
                         </Entity>
                     }
                     ```
-                -   エンティティにカスタムロジックを追加。
-                -   PlayCanvasの `Script` クラスを拡張したクラスを `script` prop に渡す。
-                -   追加のpropsはScriptクラスのプロパティとして使用可能。
-            -   `GSplat`: Gaussian Splat コンポーネント
-                -   使用例:
+                -   Adds custom logic to an entity.
+                -   Pass a class that extends PlayCanvas's `Script` class to the `script` prop.
+                -   Additional props can be used as properties of the Script class.
+
+            -   `GSplat`: Gaussian Splat Component
+                -   Example:
                     ```javascript
                     import { GSplat } from '@playcanvas/react/components'
                     import { useAsset } from '@playcanvas/react/hooks'
@@ -299,26 +311,33 @@
                         </Entity>)
                     }
                     ```
-                -   Gaussian Splat モデルを描画。
-                -   `asset`: Gaussian Splat アセット。
+                -   Draws a Gaussian Splat model.
+                -   `asset`: Gaussian Splat asset.
+
         -   **Hooks:**
-            -   `useApp`: 現在アクティブなApplicationインスタンスを返す。PlayCanvas Applicationインスタンスへの直接の参照が必要な場合に有用。
+            -   `useApp`: Returns the currently active Application instance. Useful when a direct reference to the PlayCanvas Application instance is needed.
                 ```javascript
                 import { useApp } from '@playcanvas/react/hooks'
                 ```
-            -   `useParent`: 現在のコンポーネントの親Entityを返す。カスタムコンポーネントを特定のEntityにアタッチする必要がある場合に有用。
+            -   `useParent`: Returns the parent Entity of the current component. Useful when a custom component needs to be attached to a specific Entity.
                 ```javascript
                 import { useParent } from '@playcanvas/react/hooks'
                 ```
-            -   `useMaterial`: StandardMaterialインスタンスを返す。マテリアルを作成し、Renderコンポーネントに適用する必要がある場合に有用。
+            -   `useMaterial`: Returns a StandardMaterial instance. Useful when you need to create a material and apply it to a Render component.
                 ```javascript
                 import { useMaterial } from '@playcanvas/react/hooks'
                 ```
 
-5.  Package Manager (bun) Specific Rules:
-    -   Use `bun` for package management. 🐰 パッケージ管理は、もうbunしか勝たん！
-    -   Use `bun install` to install dependencies. 🌱 依存関係のインストールは、`bun install` で！
-    -   Use `bun add <package>` to add new dependencies. ➕ 新しいパッケージを追加するときは、`bun add <package>`！
-    -   Use `bun remove <package>` to remove dependencies. ➖ いらないパッケージは、`bun remove <package>` で消し去れ！
-    -   `bun`コマンドのエラーが出たら、bunのドキュメントを参照し、解決策を探すこと。 📖 bunの公式ドキュメントは、問題解決の頼もしい味方！
-    -   `package.json`や`bun.lockb`ファイルは、常に最新の状態を保つこと。 🔒 バージョン管理は、超重要！
+    -   **Type Definitions:**
+        -   PlayCanvas React type definitions are still under development.
+        -   If you encounter TypeScript errors... Consult the PlayCanvas official documentation.
+        -   Therefore, when TypeScript errors occur... Use `// @ts-ignore` to ignore the errors.
+        -   However, `// @ts-expect-error` is only a temporary measure! Modify as needed, with the expectation that type definitions will improve over time.
+
+5.  **Package Manager (bun) Specific Rules**
+    -   Use `bun` for package management.
+    -   Use `bun install` to install dependencies.
+    -   Use `bun add <package>` to add new dependencies.
+    -   Use `bun remove <package>` to remove dependencies.
+    -   If `bun` command errors, consult bun documentation for solutions.
+    -   Keep `package.json` and `bun.lockb` files up to date.

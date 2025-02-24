@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+  overflow-x: hidden;
+  background: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* キャンバスコンテナのスタイル */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.canvas-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* スクロールアニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* スクロールプログレスバーのアニメーション */
+@keyframes progressGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255,255,255,0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255,255,255,0.3);
+  }
+}
+
+.progress-bar {
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+/* テキストのシャドウ効果 */
+.text-glow {
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* モバイル最適化 */
+@media (max-width: 768px) {
+  .canvas-container {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport heightのサポート */
+  }
+
+  .text-content {
+    padding-bottom: env(safe-area-inset-bottom, 16px); /* iPhoneのノッチ対応 */
+  }
+}
+
+/* スムーズなトランジション */
+.section-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* インタラクティブ要素のホバー効果 */
+.hover-effect {
+  transition: all 0.3s ease;
+}
+
+.hover-effect:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+/* スクロールスナップ */
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* パフォーマンス最適化 */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hardware-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
