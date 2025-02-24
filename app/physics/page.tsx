@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import {  Entity } from "@playcanvas/react";
+import { Entity } from "@playcanvas/react";
 import {
 	Camera,
 	Collision,
@@ -19,7 +19,7 @@ import {
 	EVENT_MOUSEMOVE,
 	EVENT_TOUCHMOVE,
 	Script as PcScript,
-	StandardMaterial,
+	type StandardMaterial,
 	Vec2,
 	Vec3,
 } from "playcanvas";
@@ -32,7 +32,7 @@ import { NUM_SHAPES, SHAPES, rand } from "./utils/constants";
 interface ShapeColliderProps {
 	children: React.ReactNode;
 	scale?: number;
-	material?: StandardMaterial
+	material?: StandardMaterial;
 	type?: "sphere" | "capsule";
 	hide?: boolean;
 	position?: [number, number, number];
@@ -63,15 +63,15 @@ const Physics = () => {
 	// マテリアルの設定
 	const matA = useMaterial({
 		diffuse: new Color(0.75, 0.63, 0.63),
-		emissive: new Color(1, 0, 0)
+		emissive: new Color(1, 0, 0),
 	});
 	const matB = useMaterial({
 		diffuse: new Color(0.63, 0.75, 0.63),
-		emissive: new Color(0, 1, 0)
+		emissive: new Color(0, 1, 0),
 	});
 	const matC = useMaterial({
 		diffuse: new Color(0.63, 0.63, 0.75),
-		emissive: new Color(0, 0, 1)
+		emissive: new Color(0, 0, 1),
 	});
 	const materials = [matA, matB, matC];
 

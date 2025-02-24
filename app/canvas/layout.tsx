@@ -1,15 +1,11 @@
-"use client"
+"use client";
 
-import { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 interface CanvasLayoutProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 export default function CanvasLayout({ children }: CanvasLayoutProps) {
-  return (
-    <div className="relative">
-      {children}
-    </div>
-  );
+	return <div className="relative">{children}</div>;
 }

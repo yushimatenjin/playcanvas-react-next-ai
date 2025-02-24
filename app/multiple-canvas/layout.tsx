@@ -2,7 +2,7 @@
 import { Application } from "@playcanvas/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from "playcanvas";
-import "./globals.css"
+import "./globals.css";
 
 const queryClient = new QueryClient();
 
@@ -12,8 +12,6 @@ export default function PhysicsLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<QueryClientProvider client={queryClient}>
-				{children}
-		</QueryClientProvider>
+		<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 	);
 }

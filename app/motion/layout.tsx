@@ -12,9 +12,7 @@ export default function PhysicsLayout({
 }>) {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Application fillMode={FILLMODE_FILL_WINDOW}>
-				{children}
-			</Application>
+			<Application fillMode={FILLMODE_FILL_WINDOW}>{children}</Application>
 		</QueryClientProvider>
 	);
 }

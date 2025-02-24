@@ -3,228 +3,233 @@
 @tailwind utilities;
 
 :root {
-  /* シックなカラーパレット */
-  --accent-primary: #2a4365; /* ダークネイビー */
-  --accent-secondary: #997beb; /* ディープパープル */
-  --text-primary: #E2E8F0;
-  --text-secondary: #A0AEC0;
-  --background-start: #1a2238; /* Adjusted for a deeper tone */
-  --background-end: #1a2238; /* Adjusted for a deeper tone */
-  --overlay-light: rgba(200, 200, 200, 0.1);
-  --overlay-dark: rgba(70, 130, 255, 0.6);
-  --vscode-descriptionForeground: #cccccc;
+	/* シックなカラーパレット */
+	--accent-primary: #2a4365; /* ダークネイビー */
+	--accent-secondary: #997beb; /* ディープパープル */
+	--text-primary: #e2e8f0;
+	--text-secondary: #a0aec0;
+	--background-start: #1a2238; /* Adjusted for a deeper tone */
+	--background-end: #1a2238; /* Adjusted for a deeper tone */
+	--overlay-light: rgba(200, 200, 200, 0.1);
+	--overlay-dark: rgba(70, 130, 255, 0.6);
+	--vscode-descriptionForeground: #cccccc;
 }
 
 body {
-  background: linear-gradient(135deg, var(--background-start), var(--background-end));
-  color: var(--text-primary);
-  overflow-x: hidden;
-  font-feature-settings: "palt";
-  -webkit-font-smoothing: antialiased;
-  margin: 0;
-  padding: 0;
+	background: linear-gradient(
+		135deg,
+		var(--background-start),
+		var(--background-end)
+	);
+	color: var(--text-primary);
+	overflow-x: hidden;
+	font-feature-settings: "palt";
+	-webkit-font-smoothing: antialiased;
+	margin: 0;
+	padding: 0;
 }
 
 /* Canvas コンテナのスタイル */
 .canvas-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  pointer-events: none;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	pointer-events: none;
 }
 
 .canvas-container.interactive {
-  pointer-events: auto;
+	pointer-events: auto;
 }
 
 /* PlayCanvas キャンバスのスタイル */
 canvas {
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute !important;
-  top: 0;
-  left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	position: absolute !important;
+	top: 0;
+	left: 0;
 }
 
 /* セクションのスタイル */
 .section-content {
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
+	position: relative;
+	z-index: 10;
+	pointer-events: auto;
 }
 
 /* エレガントなグラデーション背景 */
 .hero-gradient {
-  background: radial-gradient(
-    circle at center,
-    var(--overlay-light) 0%,
-    transparent 70%
-  );
-  position: relative;
+	background: radial-gradient(
+		circle at center,
+		var(--overlay-light) 0%,
+		transparent 70%
+	);
+	position: relative;
 }
 
 .hero-gradient::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    45deg,
-    var(--accent-primary) 0%,
-    transparent 100%
-  );
-  opacity: 0.1;
-  pointer-events: none;
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(45deg, var(--accent-primary) 0%, transparent 100%);
+	opacity: 0.1;
+	pointer-events: none;
 }
 
 /* テキストスタイル */
 .text-elegant {
-  color: var(--text-primary);
-  text-shadow: 0 2px 4px var(--overlay-dark);
-  letter-spacing: -0.02em;
+	color: var(--text-primary);
+	text-shadow: 0 2px 4px var(--overlay-dark);
+	letter-spacing: -0.02em;
 }
 
 .text-accent {
-  background: linear-gradient(
-    135deg,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
-  -webkit-background-clip: text;
-  color: transparent;
-  position: relative;
+	background: linear-gradient(
+		135deg,
+		var(--accent-primary),
+		var(--accent-secondary)
+	);
+	-webkit-background-clip: text;
+	color: transparent;
+	position: relative;
 }
 
 .text-accent::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--accent-primary),
-    var(--accent-secondary),
-    transparent
-  );
-  opacity: 0.5;
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--accent-primary),
+		var(--accent-secondary),
+		transparent
+	);
+	opacity: 0.5;
 }
 
 /* セパレーターライン */
 .elegant-line {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--overlay-light),
-    transparent
-  );
-  margin: 2rem 0;
-  position: relative;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--overlay-light),
+		transparent
+	);
+	margin: 2rem 0;
+	position: relative;
 }
 
 .elegant-line::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--accent-primary),
-    var(--accent-secondary),
-    transparent
-  );
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 30%;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--accent-primary),
+		var(--accent-secondary),
+		transparent
+	);
 }
 
 /* スキルプログレス */
 .skill-progress {
-  stroke: var(--accent-primary);
-  stroke-width: 4;
-  fill: none;
-  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+	stroke: var(--accent-primary);
+	stroke-width: 4;
+	fill: none;
+	transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .skill-progress-bg {
-  stroke: var(--overlay-light);
-  stroke-width: 4;
-  fill: none;
+	stroke: var(--overlay-light);
+	stroke-width: 4;
+	fill: none;
 }
 
 /* モーダル */
 .modal-overlay {
-  background: var(--overlay-dark);
-  backdrop-filter: blur(8px);
-  z-index: 50;
+	background: var(--overlay-dark);
+	backdrop-filter: blur(8px);
+	z-index: 50;
 }
 
 /* アニメーション */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
 }
 
 .floating {
-  animation: float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+	animation: float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* レスポンシブ調整 */
 @media (max-width: 768px) {
-  .text-elegant {
-    font-size: 2rem;
-  }
+	.text-elegant {
+		font-size: 2rem;
+	}
 
-  .canvas-container {
-    min-height: 50vh;
-  }
+	.canvas-container {
+		min-height: 50vh;
+	}
 }
 
 /* スクロールバー */
 ::-webkit-scrollbar {
-  width: 6px;
+	width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-start);
+	background: var(--background-start);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 3px;
+	background: var(--accent-primary);
+	border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-secondary);
+	background: var(--accent-secondary);
 }
 
 /* 3D要素のコンテナ */
 .scene-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  perspective: 1000px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	perspective: 1000px;
 }
 
 /* オーバーレイコンテンツ */
 .overlay-content {
-  position: relative;
-  z-index: 20;
-  pointer-events: auto;
+	position: relative;
+	z-index: 20;
+	pointer-events: auto;
 }
 
 /* インタラクティブな要素 */
 .interactive-element {
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .interactive-element:hover {
-  transform: scale(1.02);
+	transform: scale(1.02);
 }
